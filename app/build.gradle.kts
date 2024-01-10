@@ -4,12 +4,11 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("com.google.dagger.hilt.android")
-    kotlin("kapt")
 }
 
 android {
     namespace = "com.example.myapplication232"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.myapplication232"
@@ -44,7 +43,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -58,9 +57,11 @@ dependencies {
 
     // Dependency Injection
     implementation ("com.google.dagger:hilt-android:2.48")
-    kapt ("com.google.dagger:hilt-compiler:2.44.2")
+    kapt ("com.google.dagger:hilt-compiler:2.48")
 
     implementation ("com.jakewharton.timber:timber:5.0.1")
+
+    implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
 
     // Networking
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
