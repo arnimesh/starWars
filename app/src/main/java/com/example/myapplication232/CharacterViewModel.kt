@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
 data class CharacterItemUiState(
     val name: String? = null,
@@ -41,8 +43,10 @@ data class CharacterItemUiState(
 data class CharacterFilter(
     val searchQuery: String? = null,
 )
-class CharacterViewModel constructor(characterRepository: CharacterRepository) : ViewModel() {
-
+    @HiltViewModel
+    class CharacterViewModel @Inject constructor(
+        characterRepository: CharacterRepository
+    ) : ViewModel() {
     data class UiState(
         val filter: CharacterFilter = CharacterFilter()
     )
