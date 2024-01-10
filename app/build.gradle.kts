@@ -69,6 +69,11 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation ("com.google.code.gson:gson:2.10.1")
 
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation ("io.kotest:kotest-assertions-core:5.5.5")
+    testImplementation ("io.mockk:mockk:1.13.4")
+    testImplementation ("androidx.paging:paging-testing:3.2.0-alpha04")
+
 }
 kapt {
     correctErrorTypes=true

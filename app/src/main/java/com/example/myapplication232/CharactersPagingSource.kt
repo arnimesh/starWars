@@ -9,20 +9,26 @@ private const val STARTING_PAGE_INDEX = 0
 const val NETWORK_PAGE_SIZE = 10
 
 class CharactersPagingSource(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val searchQuery: String?
+
 ) : PagingSource<Int, Character>() {
 
     // FIXME: remove local caching once the server is able to send paginated data
-    private var cachedCountries = listOf<Character>()
+    private var cachedCharacters = listOf<Character>()
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         val pageIndexKey = params.key ?: STARTING_PAGE_INDEX
         return try {
-            if (cachedCountries.isEmpty()) {
-                cachedCountries = apiService.getCharacters().results
+            if (cachedCharacters.isEmpty()) {
+                cachedCharacters = apiService.getCharacters().results.filter {
+                    if (searchQuery != null)
+                        it.name.contains(searchQuery, ignoreCase = true)
+                    else true
+                }        
             }
 
-            val countries = cachedCountries.subList(pageIndexKey * params.loadSize, params.loadSize)
+            val countries = cachedCharacters.subList(pageIndexKey * params.loadSize, params.loadSize)
 
             val nextKey =
                 if (countries.isEmpty()) {
